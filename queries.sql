@@ -57,6 +57,6 @@ Group By species
 
 SELECT species, avg(escape_attempts)
 from animals
-WHERE date_of_birth > '1990-1-1' and date_of_birth < '2000-1-1'
-Group By species
+WHERE date_of_birth > '1990-1-1' and date_of_birth < '2000-12-31'
+Group By species, date_of_birth;
 
