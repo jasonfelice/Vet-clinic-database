@@ -60,3 +60,32 @@ from animals
 WHERE date_of_birth > '1990-1-1' and date_of_birth < '2000-12-31'
 Group By species, date_of_birth;
 
+SELECT * FROM animals
+JOIN owners ON animals.owner_id = owners.id
+WHERE owner_id = 4
+
+SELECT * FROM animals
+JOIN species ON animals.species_id = species.id
+WHERE species_id = 1
+
+SELECT * FROM animals
+JOIN owners ON animals.owner_id = owners.id
+
+SELECT species.name, COUNT(species_id)
+FROM animals
+JOIN species ON species_id = species.id
+GROUP BY species.name
+
+SELECT * from owners
+JOIN animals ON owners.id = animals.owner_id
+WHERE owners.id = 2
+
+SELECT * from owners
+JOIN animals ON owners.id = animals.owner_id
+WHERE owners.id = 5 and animals.escape_attempts < 1
+
+SELECT full_name, count(animals) AS owned_animals from animals
+JOIN owners ON  animals.owner_id = owners.id
+GROUP by owners.full_name
+ORDER BY owned_animals DESC
+LIMIT 1
