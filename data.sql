@@ -14,11 +14,14 @@ INSERT INTO animals (id, name, date_of_birth, escape_attempts, neutered, weight_
       (10, 'Blossom', '1998-10-13', 3, true, 17),
       (11, 'Ditto', '2022-5-14', 4, true, 22);
 
-INSERT INTO owners (full_name, age) VALUES (
+INSERT INTO owners (full_name, age) VALUES
     ('Sam Smith', 34),
     ('Jennifer Orwell', 19),
     ('Bob', 45),
     ('Melody Pond', 77),
     ('Dean Winchester', 14),
-    ('Jodie Whittaker', 38)
-);
+    ('Jodie Whittaker', 38);
+
+INSERT INTO species (name) Values
+    ('Pokemon'),
+    ('Digimon');
