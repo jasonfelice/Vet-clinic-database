@@ -136,7 +136,7 @@ SELECT count(v) FROM animals
          JOIN visits v ON animals.id = v.animal_id
          JOIN vets v2 ON v2.id = v.vet_id
          LEFT JOIN specializations s ON v2.id = s.vet_id
-WHERE s.vet_id IS NULL;
+WHERE animals.species_id NOT IN (SELECT species_id FROM specializations WHERE vet_id = v2.id);
 
 SELECT s.name, count(s.name) AS count
 FROM animals
