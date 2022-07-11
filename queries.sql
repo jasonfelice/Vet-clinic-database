@@ -89,3 +89,60 @@ JOIN owners ON  animals.owner_id = owners.id
 GROUP by owners.full_name
 ORDER BY owned_animals DESC
 LIMIT 1
+
+SELECT animals.name FROM animals
+    JOIN visits ON animals.id = visits.animal_id
+    JOIN vets ON vets.id = visits.vet_id
+WHERE vets.name = 'William Tatcher'
+ORDER BY visits.date_of_visit desc
+LIMIT 1;
+
+SELECT count(distinct animal_id) FROM visits
+         join vets vet on vet.id = visits.vet_id
+WHERE vet.name = 'Stephanie Mendez';
+
+SELECT vets.name AS name, splz.name AS specialization from vets
+    LEFT JOIN specializations cu on vets.id = cu.vet_id
+    LEFT JOIN species splz ON splz.id = cu.species_id;
+
+SELECT animals.name FROM animals
+         JOIN visits v on animals.id = v.animal_id
+         JOIN vets v2 on v2.id = v.vet_id
+WHERE v2.name = 'Stephanie Mendez'
+  AND v.date_of_visit >= '2020-04-01'
+  AND v.date_of_visit <= '2020-08-30';
+
+SELECT animals.name, count(v.animal_id) AS count FROM animals
+    JOIN visits v ON animals.id = v.animal_id
+GROUP BY animal_id, animals.name
+ORDER BY count DESC
+LIMIT 1;
+
+SELECT animals.name FROM animals
+    JOIN visits cu ON animals.id = cu.animal_id
+    JOIN vets vt ON vt.id = cu.vet_id
+WHERE vt.name = 'Maisy Smith'
+ORDER BY cu.date_of_visit
+LIMIT 1;
+
+SELECT animals.name AS animal_name, v2.name AS vet_name, v.date_of_visit AS visit_date
+FROM animals
+         JOIN visits v ON animals.id = v.animal_id
+         JOIN vets v2 ON v2.id = v.vet_id
+ORDER BY v.date_of_visit DESC
+LIMIT 1;
+
+SELECT count(v) FROM animals
+         JOIN visits v ON animals.id = v.animal_id
+         JOIN vets v2 ON v2.id = v.vet_id
+         LEFT JOIN specializations s ON v2.id = s.vet_id
+WHERE animals.species_id NOT IN (SELECT species_id FROM specializations WHERE vet_id = v2.id);
+
+SELECT s.name, count(s.name) AS count
+FROM animals
+         JOIN species s ON s.id = animals.species_id
+         JOIN visits v ON animals.id = v.animal_id
+         JOIN vets v2 ON v2.id = v.vet_id
+WHERE v2.name = 'Maisy Smith'
+GROUP BY s.name ORDER BY count DESC 
+LIMIT 1;
